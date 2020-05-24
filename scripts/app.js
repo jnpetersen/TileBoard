@@ -52,6 +52,7 @@ var TYPES = {
    SLIDER: 'slider',
    IFRAME: 'iframe',
    DOOR_ENTRY: 'door_entry',
+   POPUP_LAYOUT: 'popup_layout',
    WEATHER: 'weather',
    CLIMATE: 'climate',
    MEDIA_PLAYER: 'media_player',

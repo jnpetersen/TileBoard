@@ -19,6 +19,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    $scope.activeCamera = null;
    $scope.activeDoorEntry = null;
+   $scope.activePopupLayout = null;
    $scope.activeIframe = null;
    $scope.activeHistory = null;
 
@@ -29,6 +30,7 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
 
    var latestAlarmActions = {};
    var doorEntryTimeout = null;
+   var popupLayoutTimeout = null;
    var bodyClass = null;
    var mainStyles = {};
    var activePage = null;
@@ -65,6 +67,8 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
          case TYPES.SCENE: return $scope.callScene(item, entity);
 
          case TYPES.DOOR_ENTRY: return $scope.openDoorEntry(item, entity);
+
+         case TYPES.POPUP_LAYOUT: return $scope.openPopupLayout(item, entity);
 
          case TYPES.ALARM: return $scope.openAlarm(item, entity);
 
@@ -1680,6 +1684,24 @@ App.controller('Main', ['$scope', '$timeout', '$location', 'Api', function ($sco
       $scope.activeDoorEntry = null;
 
       if(doorEntryTimeout) clearTimeout(doorEntryTimeout);
+   };
+
+   $scope.openPopupLayout = function (item, entity) {
+      $scope.activePopupLayout = item;
+
+      if(popupLayoutTimeout) clearTimeout(popupLayoutTimeout);
+
+      if(CONFIG.popupLayoutTimeout) {
+         popupLayoutTimeout = $timeout(function () {
+            $scope.closePopupLayout();
+         }, CONFIG.popupLayoutTimeout * 1000);
+      }
+   };
+
+   $scope.closePopupLayout = function () {
+      $scope.activePopupLayout = null;
+
+      if(popupLayoutTimeout) clearTimeout(popupLayoutTimeout);
    };
 
    $scope.openAlarm = function (item) {

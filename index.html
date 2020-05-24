@@ -28,6 +28,12 @@
    </style>
 
    <script type="text/javascript">
+      // Debugging
+      const queryString = window.location.search;
+      const urlParams = new URLSearchParams(queryString);
+      const debug = urlParams.get('debug');
+      // Debugging
+
       var suffix = location.protocol === "file:" ? "" : "?r=" + Math.random();
 
       [
@@ -63,7 +69,7 @@
          'scripts/controllers/noty.js',
          'scripts/controllers/screensaver.js'
       ].map(function (value) {
-         document.write('<sc'+'ript src="'+value+suffix+'"></scr'+'ipt>');
+         document.write('<sc'+'ript src="'+value+(debug ? '' : suffix)+'"></scr'+'ipt>');
       });
    </script>
 </head>
@@ -194,6 +200,24 @@
 
             <div class="door-entry-popup--tiles">
                <div tile ng-repeat="item in activeDoorEntry.layout.tiles track by $index"></div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="popup-layout-popup"
+        ng-if="activePopupLayout && (page = activePopupLayout.layout.page)">
+      <div class="popup-layout-popup-container">
+         <div class="popup-layout-popup-title">
+            <div class="layout-popup-close" ng-click="closePopupLayout()">
+               <i class="mdi mdi-close"></i>
+            </div>
+            {{ entityTitle(activePopupLayout, entity) }}
+         </div>
+
+         <div class="layout-popup-container" ng-style="{'background-image':'url({{page.bg}})'}">
+            <div class="layout-popup--tiles">
+               <div tile ng-repeat="item in activePopupLayout.layout.tiles track by $index"></div>
             </div>
          </div>
       </div>
@@ -937,6 +961,15 @@
          </div>
       </div>
 
+      <div ng-if="item.type === TYPES.POPUP_LAYOUT"
+           class="item-entity-container">
+
+         <div class="item-entity">
+            <span class="item-entity--icon mdi"
+                  ng-class="entityIcon(item, entity)"></span>
+         </div>
+      </div>
+
 
       <div ng-if="item.type === TYPES.ALARM"
            class="item-entity-container">
@@ -1227,6 +1260,17 @@
                   </td>
                </tr>
             </table>
+            <div>
+               <div class="media-player--button -volume_down"
+                     ng-click="sendPlayer('volume_down', item, entity)">
+                  <i class="mdi mdi-volume-minus"></i>
+               </div>
+
+               <div class="media-player--button -volume_up"
+                     ng-click="sendPlayer('volume_up', item, entity)">
+                  <i class="mdi mdi-volume-plus"></i>
+               </div>
+            </div>
          </div>
 
          <div ng-if="selectOpened(item)" class="item-select"

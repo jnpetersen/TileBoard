@@ -22,6 +22,9 @@
 .item.-th-door_entry {
   background-color: #259eb0;
 }
+.item.-th-popup_layout {
+  background-color: #259eb0;
+}
 .item.-th-script {
   background-color: #259eb0;
 }
@@ -513,6 +516,7 @@ body {
 .item.-camera_stream,
 .item.-alarm,
 .item.-door_entry,
+.item.-popup_layout,
 .item.-popup_iframe,
 .item.-input_datetime,
 .item.-dimmer_switch,
@@ -540,6 +544,7 @@ body {
 .item.-camera_stream:active,
 .item.-alarm:active,
 .item.-door_entry:active,
+.item.-popup_layout:active,
 .item.-popup_iframe:active,
 .item.-input_datetime:active,
 .item.-dimmer_switch:active,
@@ -564,6 +569,7 @@ body {
 .item.-camera_stream .item-clickable,
 .item.-alarm .item-clickable,
 .item.-door_entry .item-clickable,
+.item.-popup_layout .item-clickable,
 .item.-popup_iframe .item-clickable,
 .item.-input_datetime .item-clickable,
 .item.-dimmer_switch .item-clickable,
@@ -1021,6 +1027,7 @@ camera_stream div {
 }
 .camera-popup,
 .door-entry-popup,
+.popup-layout-popup,
 .iframe-popup,
 .history-popup {
   position: fixed;
@@ -1035,18 +1042,21 @@ camera_stream div {
 }
 .camera-popup-container,
 .door-entry-popup-container,
+.popup-layout-popup-container,
 .iframe-popup-container,
 .history-popup-container {
-  background: #111;
+  /* background: #111; */
   height: 100%;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
   position: relative;
   margin: auto;
+  border-radius: 20px;
 }
 .camera-popup-title,
 .door-entry-popup-title,
+.popup-layout-popup-title,
 .iframe-popup-title,
 .history-popup-title {
   background: #222;
@@ -1061,6 +1071,7 @@ camera_stream div {
 }
 .camera-popup-close,
 .door-entry-popup-close,
+.popup-layout-popup-close,
 .iframe-popup-close,
 .history-popup-close {
   float: left;
@@ -1075,6 +1086,7 @@ camera_stream div {
 }
 .camera-popup-close:active,
 .door-entry-popup-close:active,
+.popup-layout-popup-close:active,
 .iframe-popup-close:active,
 .history-popup-close:active {
   color: rgba(255, 255, 255, 0.8);
@@ -1082,6 +1094,7 @@ camera_stream div {
 }
 .camera-popup--list,
 .door-entry-popup--list,
+.popup-layout-popup--list,
 .iframe-popup--list {
   width: 200px;
   display: inline-block;
@@ -1091,6 +1104,7 @@ camera_stream div {
 }
 .camera-popup--list-item,
 .door-entry-popup--list-item,
+.popup-layout-popup--list-item,
 .iframe-popup--list-item {
   padding: 6px 10px;
   white-space: nowrap;
@@ -1104,12 +1118,14 @@ camera_stream div {
 }
 .camera-popup--list-item.-active,
 .door-entry-popup--list-item.-active,
+.popup-layout-popup--list-item.-active,
 .iframe-popup--list-item.-active {
   color: #eee;
   background: #333;
 }
 .camera-popup--camera,
 .door-entry-popup--camera,
+.popup-layout-popup--camera,
 .iframe-popup--camera {
   width: calc(100% - 220px);
   height: 100%;
@@ -1119,12 +1135,14 @@ camera_stream div {
 }
 .camera-popup--camera > div,
 .door-entry-popup--camera > div,
+.popup-layout-popup--camera > div,
 .iframe-popup--camera > div {
   height: 100%;
   width: 100%;
 }
 .camera-popup--iframe,
 .door-entry-popup--iframe,
+.popup-layout-popup--iframe,
 .iframe-popup--iframe {
   width: 100%;
   height: 100%;
@@ -1134,6 +1152,7 @@ camera_stream div {
 }
 .camera-popup--iframe > iframe,
 .door-entry-popup--iframe > iframe,
+.popup-layout-popup--iframe > iframe,
 .iframe-popup--iframe > iframe {
   height: 100%;
   width: 100%;
@@ -1180,7 +1199,22 @@ camera_stream div {
   top: 15px;
   z-index: 2;
 }
+.layout-popup--tiles {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  z-index: 2;
+}
 .door-entry-popup--camera {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  z-index: 1;
+  width: 100%;
+}
+.layout-popup--camera {
   position: absolute;
   left: 0;
   right: 0;
